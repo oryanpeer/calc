@@ -11,7 +11,7 @@
   <app.home>/opt/calc</app.home>
   <AWS_DEFAULT_REGION>us-east-2</AWS_DEFAULT_REGION>
   </properties>
-  <version>1.0.24-SNAPSHOT</version>
+  <version>1.0.24</version>
   <dependencies>
     <dependency>
       <groupId>org.antlr</groupId>
@@ -38,7 +38,7 @@
   </dependencies>
   <scm>
     <developerConnection>scm:git:ssh://git@github.com/oryanfarjon/calc.git</developerConnection>
-    <tag>calc-1.0.20</tag>
+    <tag>calc-1.0.24</tag>
   </scm>
   <distributionManagement>
     <repository>
