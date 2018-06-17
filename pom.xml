@@ -5,11 +5,13 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>taboola_test</groupId>
     <artifactId>calc</artifactId>
-    <version>1.0</version>
     <properties>
+		<release.number>1</release.number>
+		<release.version>${release.number}.${build.number}</release.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<app.home>/opt/calc</app.home>
     </properties>
+    <version>1.0.1-SNAPSHOT</version>
 
     <dependencies>
         <dependency>
@@ -138,7 +140,6 @@
                 <configuration>
                     <name>${project.artifactId}</name>
                     <copyright>No Copyright</copyright>
-                    <release>${build.number}</release>
 					<group>Application</group>
 					<mappings>
 						<mapping>
