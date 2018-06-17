@@ -4,10 +4,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>taboola_test</groupId>
-    <artifactId>taboola_test</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <artifactId>calc</artifactId>
+    <version>1.0</version>
     <properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<app.home>/opt/calc</app.home>
     </properties>
 
     <dependencies>
@@ -34,10 +35,7 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-    <packaging>rpm</packaging>
-
     <build>
-
         <plugins>
             <plugin>
                 <groupId>org.antlr</groupId>
@@ -55,7 +53,6 @@
                     </execution>
                 </executions>
             </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -70,8 +67,7 @@
                     </archive>
                 </configuration>
             </plugin>
-
-            <plugin>
+             <plugin>
                 <artifactId>maven-dependency-plugin</artifactId>
                 <executions>
                     <execution>
@@ -85,24 +81,86 @@
                     </execution>
                 </executions>
             </plugin>
-	        <plugin>
-    	    	<groupId>org.codehaus.mojo</groupId>
-        		<artifactId>rpm-maven-plugin</artifactId>
-	        	<version>2.2.0</version>
-	          <extensions>true</extensions>
+			  <plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>3.1.0</version>
 				<configuration>
-					<group>Application</group>
-					<name>calc</name>
-					<projversion>${project.version}</projversion>
-						<mappings>
-						  <mapping>
-							<directory>/${app.home}/lib/</directory>
-							<dependency/>
-							</mapping>
-						</mappings>
+				  <descriptorRefs>
+					<descriptorRef>jar-with-dependencies</descriptorRef>
+				  </descriptorRefs>
+				  <archive>
+					<manifest>
+					  <mainClass>Calc</mainClass>
+					</manifest>
+				  </archive>
 				</configuration>
-	        </plugin>
+				<executions>
+				  <execution>
+					<id>make-assembly</id>
+					<phase>package</phase>
+					<goals>
+					  <goal>single</goal>
+					</goals>
+				  </execution>
+				</executions>
+			  </plugin>
+		      <plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.6.0</version>
+				<executions>
+				  <execution>
+					<goals>
+					  <goal>exec</goal>
+					</goals>
+				  </execution>
+				</executions>
+				<configuration>
+				  <executable>${basedir}/src/main/scripts/calcwrap.sh</executable>
+				  <arguments>
+					<argument>${project.build.finalName}.jar</argument>
+					<argument>${app.home}</argument>
+				  </arguments>
+				</configuration>
+			  </plugin>	
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+                <artifactId>rpm-maven-plugin</artifactId>
+                <version>2.2.0</version>
+                <executions>
+                    <execution>
+				   		<id>generate-rpm</id>
+                        <goals>
+                             <goal>rpm</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <name>${project.artifactId}</name>
+                    <copyright>No Copyright</copyright>
+                    <release>${build.number}</release>
+					<group>Application</group>
+					<mappings>
+						<mapping>
+						    <directory>${app.home}/lib/</directory>
+						    <dependency/>
+						</mapping>
+						<mapping>
+							<directory>${app.home}</directory>
+							<artifact/>
+						</mapping>
+						<mapping>
+							<filemode>0755</filemode>
+							<directory>/usr/local/bin</directory>
+							<sources>
+								<source>
+									<location>${basedir}/src/main/bin/calc</location>
+								</source>
+							</sources>
+						</mapping>
+					</mappings>
+                </configuration>
+            </plugin>
       </plugins>
     </build>
-
 </project>
