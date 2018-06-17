@@ -73,7 +73,7 @@
                 <artifactId>maven-dependency-plugin</artifactId>
                 <executions>
                     <execution>
-                        <phase>package</phase>
+                        <phase>verify</phase>
                         <goals>
                             <goal>copy-dependencies</goal>
                         </goals>
@@ -99,7 +99,7 @@
 				<executions>
 				  <execution>
 					<id>make-assembly</id>
-					<phase>package</phase>
+					<phase>verify</phase>
 					<goals>
 					  <goal>single</goal>
 					</goals>
@@ -112,7 +112,7 @@
 				<version>1.6.0</version>
 				<executions>
 				  <execution>
-					<phase>test</phase>
+					<phase>verify</phase>
 					<goals>
 					  <goal>exec</goal>
 					</goals>
