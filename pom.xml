@@ -112,7 +112,7 @@
 				<version>1.6.0</version>
 				<executions>
 				  <execution>
-					<phase>package</phase>
+					<phase>test</phase>
 					<goals>
 					  <goal>exec</goal>
 					</goals>
