@@ -37,6 +37,9 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+	<scm>
+    	<developerConnection>scm:git:https://github.com/oryanfarjon/calc/</developerConnection>
+	</scm>
     <build>
         <plugins>
             <plugin>
@@ -73,7 +76,7 @@
                 <artifactId>maven-dependency-plugin</artifactId>
                 <executions>
                     <execution>
-                        <phase>verify</phase>
+                        <phase>test</phase>
                         <goals>
                             <goal>copy-dependencies</goal>
                         </goals>
@@ -99,7 +102,7 @@
 				<executions>
 				  <execution>
 					<id>make-assembly</id>
-					<phase>verify</phase>
+					<phase>test</phase>
 					<goals>
 					  <goal>single</goal>
 					</goals>
@@ -112,7 +115,7 @@
 				<version>1.6.0</version>
 				<executions>
 				  <execution>
-					<phase>verify</phase>
+					<phase>test</phase>
 					<goals>
 					  <goal>exec</goal>
 					</goals>
