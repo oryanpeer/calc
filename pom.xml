@@ -9,7 +9,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<app.home>/opt/calc</app.home>
     </properties>
-    <version>1.0.4</version>
+    <version>1.0.5-SNAPSHOT</version>
 
     <dependencies>
         <dependency>
@@ -37,7 +37,7 @@
     </dependencies>
 	<scm>
     	<developerConnection>scm:git:https://github.com/oryanfarjon/calc/</developerConnection>
-    <tag>calc-1.0.4</tag>
+    <tag>HEAD</tag>
   </scm>
     <build>
         <plugins>
