@@ -8,9 +8,9 @@
 		<release.version>${release.number}.${build.number}</release.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<app.home>/opt/calc</app.home>
+		<AWS_DEFAULT_REGION>us-east-2</AWS_DEFAULT_REGION>
     </properties>
     <version>1.0.4-SNAPSHOT</version>
-
     <dependencies>
         <dependency>
             <groupId>org.antlr</groupId>
@@ -37,9 +37,28 @@
     </dependencies>
 	<scm>
     	<developerConnection>scm:git:https://github.com/oryanfarjon/calc/</developerConnection>
-    <tag>HEAD</tag>
-  </scm>
+	    <tag>HEAD</tag>
+	</scm>
+    <distributionManagement>
+        <repository>
+            <id>maven-s3-release-repo</id>
+            <name>AWS Release Repository</name>
+            <url>s3://oryanartifact/releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>maven-s3-snapshot-repo</id>
+            <name>AWS Snapshot Repository</name>
+            <url>s3://oryanartifact/snapshots</url>
+        </snapshotRepository>
+	</distributionManagement>
     <build>
+	    <extensions>
+		  <extension>
+			    <groupId>com.gkatzioura.maven.cloud</groupId>
+			    <artifactId>s3-storage-wagon</artifactId>
+			    <version>1.0</version>
+			</extension>
+	    </extensions>
         <plugins>
             <plugin>
                 <groupId>org.antlr</groupId>
